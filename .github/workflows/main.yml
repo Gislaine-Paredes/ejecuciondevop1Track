@@ -30,7 +30,7 @@ jobs:
               with:
                 host: ${{ secrets.IPSERVIDOR }} #secretos
                 username: ${{ secrets.USER }}
-                password: ${{ secrets.PASSWORD }}
+                key: ${{ secrets.PASSWORD }}
                 port: ${{ secrets.PORT }}
                 script: mkdir -p /home/ubuntu/ejercicio
 
