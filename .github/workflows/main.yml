@@ -28,8 +28,8 @@ jobs:
             - name: Crear carpeta en servidor aws
               uses: appleboy/ssh-action@v1
               with:
-                host: ${{ secrets.HOST }} #secretos
-                username: linuxserver.io
+                host: ${{ secrets.IPSERVIDOR }} #secretos
+                username: ${{ secrets.USER }}
                 password: ${{ secrets.PASSWORD }}
                 port: ${{ secrets.PORT }}
                 script: mkdir -p /home/ubuntu/ejercicio
