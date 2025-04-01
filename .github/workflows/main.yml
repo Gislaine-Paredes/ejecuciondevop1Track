@@ -24,4 +24,13 @@ jobs:
               run: |
                     cd ejercicioTrackDevops1/ejercicioTrackDevops1-main
                     python manage.py test
+                    
+            - name: Crear carpeta en servidor aws
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.HOST }} #secretos
+                username: linuxserver.io
+                password: ${{ secrets.PASSWORD }}
+                port: ${{ secrets.PORT }}
+                script: whoami
 
