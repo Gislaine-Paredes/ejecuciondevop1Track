@@ -34,3 +34,29 @@ jobs:
                 port: ${{ secrets.PORT }}
                 script: mkdir -p /home/ubuntu/ejercicio
 
+            - name: Copiar archivos
+              uses: burnett01/rsync-deployments@7.0.2
+              with:
+                switches: -avzr --delete
+                path: "./"
+                remote_host: ${{ secrets.IPSERVIDOR }}
+                remote_user: ${{ secrets.USER }}
+                remote_path: "/home/ubuntu/ejercicio/"
+                remote_key: ${{ secrets.PASSWORD }}
+                remote_port: ${{ secrets.PORT }}
+
+            - name: Crear carpeta en servidor aws
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.IPSERVIDOR }} #secretos
+                username: ${{ secrets.USER }}
+                key: ${{ secrets.PASSWORD }}
+                port: ${{ secrets.PORT }}
+                script: |
+                  cd /home/ubuntu/ejercicio/ejercicioTrackDevops1/ejercicioTrackDevops1-main
+                  sudo apt install python3.12-venv -y
+                  python3 -m venv venv
+                  source venv/bin/activate
+                  pip3 install -r requeriments.txt
+                  nohup python3 manage.py runserver 0.0.0.0:8000 --noreload > /dev/null 2>&1 &
+                  exit 0
