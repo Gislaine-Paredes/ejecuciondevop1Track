@@ -32,5 +32,5 @@ jobs:
                 username: linuxserver.io
                 password: ${{ secrets.PASSWORD }}
                 port: ${{ secrets.PORT }}
-                script: whoami
+                script: mkdir -p /home/ubuntu/ejercicio
 
